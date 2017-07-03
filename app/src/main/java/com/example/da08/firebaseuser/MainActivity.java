@@ -1,10 +1,12 @@
 package com.example.da08.firebaseuser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.example.da08.firebaseuser.domain.User;
 import com.google.firebase.database.DataSnapshot;
@@ -58,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void signUp(View v){
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
     }
 
 

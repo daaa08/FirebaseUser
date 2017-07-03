@@ -1,5 +1,6 @@
 package com.example.da08.firebaseuser;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
 
+    ProgressDialog dialog;
 
 
     @Override
@@ -41,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         // root 노드인 user를 래퍼런스로 사용  (user라는 것부터 데이터 검색이나 저장을 하겠다는 의미)
         userRef = database.getReference("user");
+
+        dialog = new ProgressDialog(this);
+        dialog.setTitle("처리중..");
+        dialog.setMessage("ing...");
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.show();
+
         // 이벤트 리스너 담기
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -53,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     data.add(user);
                 }
                 refreshData(data);
+                dialog.dismiss();
             }
 
             @Override
